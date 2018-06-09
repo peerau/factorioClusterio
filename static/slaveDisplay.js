@@ -1,6 +1,7 @@
 
 // ask master for slaves and render them nicely on a page with production graphs
-setTimeout(function() {
+
+function slaveRequest() {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -51,7 +52,10 @@ setTimeout(function() {
 	}
 	xmlhttp.open("GET", "api/slaves", true);
 	xmlhttp.send();
-}, 0)
+}
+
+setTimeout(slaveRequest(), 0)
+setInterval(slaveRequest(), (1000*60*5)) // 5min in ms
 
 let chartIgnoreList = [
 	"water",
